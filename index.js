@@ -21,7 +21,7 @@ export const handler = async (event) => {
   console.log(
     "mailerlite_load handler",
     method ? method : null,
-    event.body.email ? event.body.email : event
+    safeJsonParse(event.body).email ? event.body.email : event
   );
   console.log(event.body);
   try {
