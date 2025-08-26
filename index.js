@@ -23,6 +23,7 @@ export const handler = async (event) => {
     method ? method : null,
     event.body.email ? event.body.email : event
   );
+  console.log(event.body);
   try {
     if (!event.method || !event.body) {
       console.log("Missing event method or event body");
