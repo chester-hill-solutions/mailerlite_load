@@ -22,7 +22,7 @@ const get = (payload, options = {}) => {
     },
   };
   payload ? (reqOptions.path = reqOptions.path + "/" + payload) : null;
-  console.log("options", reqOptions);
+  //console.log("options", reqOptions);
 
   return new Promise((resolve, reject) => {
     const req = https.request(reqOptions, (res) => {
@@ -47,7 +47,7 @@ const get = (payload, options = {}) => {
           data: parsed.data || null,
           errors: parsed.errors || null,
         };
-
+        console.log(result);
         resolve(result);
       });
     });
