@@ -25,16 +25,16 @@ export const handler = async (event) => {
   );
   console.log(event.body);
   try {
-    if (!event.method || !event.body) {
+    if (!method || !event.body) {
       console.log("Missing event method or event body");
       throw new HttpError(400, "Missing event method or event body");
     }
     let eventBody = safeJsonParse(event.body);
-    if (event.method === "POST") {
+    if (method === "POST") {
       let result = await post(eventBody, requestOptions);
       statusCode = result.statusCode;
       body = JSON.stringify(result);
-    } else if (event.method === "GET") {
+    } else if (method === "GET") {
       let result = await get(
         eventBody.email ? eventBody.email : undefined,
         requestOptions
