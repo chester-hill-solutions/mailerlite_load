@@ -1,6 +1,6 @@
 import { https } from "https";
 import "dotenv/config";
-import { HttpError } from "../scripts/httpError.js";
+import HttpError from "../scripts/httpError.js";
 
 const defaultOptions = {
   hostname: process.env.HOSTNAME, // replace with your API
