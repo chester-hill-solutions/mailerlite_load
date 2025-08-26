@@ -12,6 +12,7 @@ const defaultOptions = {
 };
 
 const get = (payload, options = {}) => {
+  console.log("mailerlite_load/handlers/get");
   const reqOptions = {
     ...defaultOptions,
     ...options,
@@ -20,6 +21,8 @@ const get = (payload, options = {}) => {
       ...options.headers,
     },
   };
+  payload ? (reqOptions.path = reqOptions.path + "/" + payload) : null;
+  console.log("options", reqOptions);
 
   return new Promise((resolve, reject) => {
     const req = https.request(reqOptions, (res) => {
@@ -50,11 +53,12 @@ const get = (payload, options = {}) => {
     });
 
     req.on("error", (err) => {
+      console.log("Request send error", err);
       // Wrap network/request errors in HttpError
       reject(new HttpError(err.message, 500, { originalError: err }));
     });
 
-    // Send payload
+    console.log("Send payload");
     req.write(JSON.stringify(payload));
     req.end();
   });

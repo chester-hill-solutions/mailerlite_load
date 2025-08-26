@@ -12,6 +12,7 @@ const defaultOptions = {
 };
 
 const post = (payload, options = {}) => {
+  console.log("mailerlite_load/handlers/post");
   const reqOptions = {
     ...defaultOptions,
     ...options,
@@ -20,6 +21,7 @@ const post = (payload, options = {}) => {
       ...options.headers,
     },
   };
+
   return new Promise((resolve, reject) => {
     const req = https.request(reqOptions, (res) => {
       let responseBody = "";
