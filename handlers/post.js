@@ -1,4 +1,4 @@
-import { https } from "https";
+import https from "https";
 import "dotenv/config";
 import HttpError from "../scripts/httpError.js";
 
