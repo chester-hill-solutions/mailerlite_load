@@ -1,6 +1,7 @@
 import "dotenv/config";
 import HttpError from "./scripts/httpError.js";
 import post from "./handlers/post.js";
+import get from "./handlers/get.js";
 
 const requestOptions = {
   headers: {
@@ -17,9 +18,17 @@ export const handler = async (event) => {
     }
     eventBody = JSON.parse(event.body);
     if (event.httpMethod === "POST") {
-      let result = await post(event.body, requestOptions);
+      let result = await post(eventBody, requestOptions);
       statusCode = result.statusCode;
       body = JSON.stringify(result);
+    } else if (event.httpMethod === "GET") {
+      if (event.httpMethod) {
+        if (eventBody.email) {
+          let result = await get(eventBody.email, requestOptions);
+          statusCode = result.statusCode;
+          body = JSON.stringify(result);
+        }
+      }
     } else {
       statusCode = 405;
       returnBody = "Method Not Allowed";
