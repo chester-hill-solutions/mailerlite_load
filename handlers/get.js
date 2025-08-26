@@ -47,7 +47,7 @@ const get = (payload, options = {}) => {
           data: parsed.data || null,
           errors: parsed.errors || null,
         };
-        console.log(result);
+        //console.log(result);
         resolve(result);
       });
     });

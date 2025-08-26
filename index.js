@@ -53,6 +53,7 @@ export const handler = async (event) => {
       error: error,
     });
   }
+  console.log("submod return", statusCode, returnBody);
   return {
     statusCode,
     returnBody,
