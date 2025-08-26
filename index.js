@@ -9,25 +9,31 @@ const requestOptions = {
     Authorization: "Bearer " + process.env.BEARER,
   },
 };
-
+//
 export const handler = async (event) => {
   let statusCode = 200;
   let returnBody = "";
+  let method = event.requestContext.http.method
+    ? event.requestContext.http.method
+    : event.httpMethod
+    ? event.httpMethod
+    : undefined;
   console.log(
     "mailerlite_load handler",
+    method ? method : null,
     event.body.email ? event.body.email : event
   );
   try {
-    if (!event.httpMethod || !event.body) {
-      console.log("Missing event httpMethod or event body");
-      throw new HttpError(400, "Missing event httpMethod or event body");
+    if (!event.method || !event.body) {
+      console.log("Missing event method or event body");
+      throw new HttpError(400, "Missing event method or event body");
     }
     let eventBody = safeJsonParse(event.body);
-    if (event.httpMethod === "POST") {
+    if (event.method === "POST") {
       let result = await post(eventBody, requestOptions);
       statusCode = result.statusCode;
       body = JSON.stringify(result);
-    } else if (event.httpMethod === "GET") {
+    } else if (event.method === "GET") {
       let result = await get(
         eventBody.email ? eventBody.email : undefined,
         requestOptions
