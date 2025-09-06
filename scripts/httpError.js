@@ -8,8 +8,9 @@ class HttpError extends Error {
     this.name = "HttpError";
     this.statusCode = statusCode;
     this.details = details;
-    this.stack = null;
+    this.stack = stack;
 
+    //original error exists so you can pass the error source
     if (originalError) {
       // Preserve original error info
       this.originalMessage = originalError.message;

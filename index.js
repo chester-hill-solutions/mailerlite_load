@@ -27,7 +27,7 @@ export const handler = async (event) => {
   try {
     if (!method || !event.body) {
       console.log("Missing event method or event body");
-      throw new HttpError(400, "Missing event method or event body");
+      throw new HttpError("Missing event method or event body", 400);
     }
     let eventBody = safeJsonParse(event.body);
     if (method === "POST") {
